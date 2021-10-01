@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css" />
+    <title>orinoco- Nounours</title>
+  </head>
+
+
+  <body>
+    <div class ="container">
+      
+      <nav class="nav-bar navbar-expand-lg"> 
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Accueil </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="panier.html">Panier </a>
+            </li>
+          </ul>
+      
+      </nav>
+
+      <h1>Fiche produit ours</h1>
+      <!--ligne 1 de produit pour essai-->
+      <div class="row" id="Detail">
+        <div class ="col-9" id ="produit">
+          <div class="card">
+            <img src="" id="photo" class="card-img-top"/>
+            <div class = "card-body">
+              <h2 id= "nom"></h2>
+              <p id="description"></p>
+            </div>
+          </div>
+
+        </div>
+        <div class ="col-3" id = "parametres">
+          <div id="divPrix">
+            <h5>Prix :</h5>
+            <p id="prix"></p>
+          </div>
+          <div id="couleurs">
+            <h5>Personaliser :</h5>
+            <div class="form-group">
+              <label for="option"> Choisir une option </label>
+              <select class="form-control" id="option-couleur">
+              </select>
+            </div>
+            
+          </div>
+          <div id= "quantite">
+            <h5>Quantitée :</h5>
+          <div>
+            <div class="form-group">
+              <label for="quantité"> Choisir une quantitée </label>
+              <input type="number" class="form-control" id="quantite-produit" placeholder ="0">
+            </div>
+          </div>
+          <button id="ajout" type= "button" class= "btn btn-primary"> Ajouter au panier</button>
+
+        </div>
+      </div>
+  </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/product.js"></script>
+  
+  </body>
+</html>
