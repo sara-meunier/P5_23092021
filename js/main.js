@@ -1,10 +1,6 @@
 const API_URL = "http://localhost:3000/api/teddies";
 //localStorage.clear();
 
-//on initialise le panier (vide) dans le local storage//
-/*var panierInitial = [0];
-var panierInitialStorage = JSON.stringify(panierInitial);
-localStorage.setItem ("panier", panierInitialStorage);*/
 
 //------------------------------------------------------création de la classe produit OK
 class Product {
@@ -111,30 +107,3 @@ function getProduct(id) {
             console.log("ohoh... Il y a un probléme");
         })
 }
-//---------------------------------------------------------------------function pour créer une card ?
-/*function creerCard (product) {
-    let productCard = document.createElement('div');
-    productCard.classList.add('card', "col-md-4");
-
-    let productCardBody = document.createElement("div");
-    productCardBody.classList.add('card-body');
-  
-
-    let productCardTitle = document.createElement("h5");
-    productCardTitle.classList.add('card-title');
-    productCardTitle = document.innerText= product.name;
-
-
-    let productCardButton = document.createElement("a");
-    productCardButton.classList.add("btn" , "btn-primary");
-    productCardButton.innerText = "détails";
-    productCardButton.href='product.html?id=' + product._id;
-
-    let productDiv= document.getElementById("produits");
-    productDiv.appendChild(productCard);
-
-    productCard.appendChild(productCardBody);
-
-    productCardBody.appendChild(productCardTitle);
-    productCardBody.appendChild(productCardButton);
-}*/

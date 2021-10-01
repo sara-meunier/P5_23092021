@@ -2,26 +2,6 @@
 console.log("hello world");
 
 
-
-
-
-//getProducts();
-//document.getElementById("description1").innerText="blabla, test dans la div description";
-//afficheListeProduit();
-//getProduct(2);
-
-/*document.getElementById("photo1").innerText= getProduct(2); NON*/
-
-//creerDivBoucle();
-
-creerListProduit()
-.then (function (nounours){
-    console.log(nounours);
-    console.log(nounours[2])
-});
-
-//console.log("deuxieme log : "+nounours[3]);
-
 creerListProduit()
 .then ( function (nounours) {
  for (let i in nounours){
@@ -59,5 +39,3 @@ creerListProduit()
  }
     
 });
-//pourquoi ç amarche pas ?
-//console.log(nounours [2]);

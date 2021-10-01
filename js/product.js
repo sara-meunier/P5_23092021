@@ -29,12 +29,6 @@ getProduct(id)
   });
 
 
-  /* verification du panier pour test*/
-
-  let test = localStorage.getItem("panier");
-  //let test= JSON.parse(testStor);
-  console.log( "dans le panier actuellement : " + test);
-
 /*---------------------------------------------------------------- ajout des articles dans le panier*/
 
 const button = document.getElementById("ajout");
@@ -51,7 +45,13 @@ button.addEventListener("click", () => {
   getProduct(id)
     /* on créer l'objet contenant le produit + les infos pour le panier*/
   .then(function (nounours) {                 
-    let productPanier = { productPanierId: id, productPanierNumber: productNumber, productPanierName : nounours.name, productPanierImageUrl: nounours.imageUrl, productPanierPrice : nounours.price };
+    let productPanier = { 
+      productPanierId: id,
+      productPanierNumber: productNumber,
+      productPanierName : nounours.name,
+      productPanierImageUrl: nounours.imageUrl,
+      productPanierPrice : nounours.price };
+
     console.log ("productPanier : " + JSON.stringify(productPanier));
     return productPanier;
   }) 
@@ -74,11 +74,10 @@ button.addEventListener("click", () => {
 
       /*on compare les id de l'objet aux id du panier*/
       let doublon = false;
-      //let productNumberBefore = 0;
       for (let i in panierTemp) {
         if (panierTemp[i].productPanierId === id) { // on regarde si le produit est déjà dans le panier
           console.log ("il y a deja cet element dans le panier");
-          panierTemp[i].productPanierNumber += productNumber;
+          panierTemp[i].productPanierNumber += productNumber; //on change le nombre de produit dans le panier
           console.log("il y avait deja  produits avec cet id dans le panier")
           doublon = true;
           break;
@@ -87,15 +86,14 @@ button.addEventListener("click", () => {
 
       console.log("doublon : " + doublon);
 
-      if (doublon === true) {
-        console.log("il y a maintenant : " +  productPanier.productPanierNumber +"produits");
-        localStorage.removeItem("panier");
+      if (doublon === true) { //si il y a un doublon
+        localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
         let variableStorage = JSON.stringify(panierTemp);
         localStorage.setItem("panier", variableStorage);
       }
       else {
-        localStorage.removeItem("panier");
-        panierTemp.push(productPanier);
+        localStorage.removeItem("panier"); // si pas de doublon
+        panierTemp.push(productPanier);// on ajout le nouveau produit et on remplace l'ancien panier par le nouveau
         let variableStorage = JSON.stringify(panierTemp);
         localStorage.setItem("panier", variableStorage);       
       };
