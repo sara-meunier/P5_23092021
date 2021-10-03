@@ -34,31 +34,44 @@ else { //si le panier est plein
         divProductPrice.classList.add("col", "border", "m-2", "text-center");
         divProduct.appendChild(divProductPrice);
 
-        //on crée la div modifQuantite
-        let divModifQuantite = document.createElement("div");
-        divModifQuantite.classList.add("col","row");
-        divProduct.appendChild(divModifQuantite);
-
         // on crée le bouton +
         let buttonAdd = document.createElement('button');
         buttonAdd.innerText = "+";
         buttonAdd.classList.add("btn","btn-primary", "col-2", "m-2", "text-center", "add" );
-        buttonAdd.type = "button";
+        buttonAdd.type = "button"; 
        // buttonAdd.id = "add";
-        divModifQuantite.appendChild(buttonAdd);
+        divProduct.appendChild(buttonAdd);
+        buttonAdd.addEventListener("click", () => {
+            alert("click-add");
+            panier[i].productPanierNumber += 1;
+            divNumber.innerText = panier[i].productPanierNumber;
+            localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
+            let variableStorage = JSON.stringify(panier);
+            localStorage.setItem("panier", variableStorage);
+
+        })
         
         //on crée le bouton -
         let buttonRemove = document.createElement('button');
         buttonRemove.classList.add("btn","btn-primary", "col-2", "m-2", "text-center","remove" );
         buttonRemove.type = "button";
         buttonRemove.innerText = "-";
-        divModifQuantite.appendChild(buttonRemove);
+        divProduct.appendChild(buttonRemove);
+        buttonRemove.addEventListener("click", () => {
+            alert("click-add");
+            panier[i].productPanierNumber -= 1;
+            divNumber.innerText = panier[i].productPanierNumber;
+            localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
+            let variableStorage = JSON.stringify(panier);
+            localStorage.setItem("panier", variableStorage);
+
+        })
 
         //on crée la div avec la quantité du produit
         let divNumber = document.createElement('div');
         divNumber.classList.add("col", "border", "m-2", "text-center", "divNumber");
         divNumber.innerText = panier[i].productPanierNumber;
-        divModifQuantite.appendChild(divNumber);
+        divProduct.appendChild(divNumber);
     };
 
     //on crée la div avec le total
@@ -73,24 +86,3 @@ else { //si le panier est plein
     divPanier.appendChild(divResume);
 }
 ;
-
-
-/*--------------------------------------------- fonction add*/
-//Il faut utiliser les promesses pour d'abord executer la mise en page puis l'eventlistener
-
-/*SetTimeout ( function () {
-    let truc = document.getElementsByClassName("add");
-
-    truc.addEventListener("click", () => {
-        console.log("click");
-        let parent= buttonAdd.closest("div");
-        let divNumber =  parent.querySelector(".add");    
-        divNumber.innerText += 1;
-    });
-}, 100);
-
-
-
-/*----------------------------------------- fonction remove */
-
-/*------------------------------------------ formulaire*/
