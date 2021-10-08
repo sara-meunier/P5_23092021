@@ -28,10 +28,9 @@
       
       </nav>
 
-      <h1> Votre Panier</h1>
+      <h2> Votre Panier</h2>
       <!--ligne 1 de produit pour essai-->
       <div id="panier">
-
         <table class="table" >
           <thead>
             <tr>
@@ -47,7 +46,60 @@
 
           </tbody>
         </table>
+      </div>
 
+      <div id="buttonBuy" class="text-center">
+      </div>
+
+      <div id="formulaire">
+        <h2> Formulaire de contact</h2>
+        <form class="needs-validation" novalidate id="form">
+          <div class="row">
+
+            <div class="col">
+              <label for="firstName" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="firstName" placeholder="Prénom" required>
+              <div class="invalid-feedback">
+                information obligatoire
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="lastName" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Nom de famille" required>
+              <div class="invalid-feedback">
+                information obligatoire
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label for="adress" class="form-label">Adresse</label>
+            <input type="text" class="form-control" id="adress" placeholder="Adresse" required>
+            <div class="invalid-feedback">
+              information obligatoire
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="city" class="form-label">Ville</label>
+            <input type="text" class="form-control" id="city" placeholder="ville" required>
+            <div class="invalid-feedback">
+              information obligatoire
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">adresse e-mail</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email" required>
+            <div class="invalid-feedback"> Cette adresse mail n'est pas valide
+            </div>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+        </form> 
       </div>
   </div>
 

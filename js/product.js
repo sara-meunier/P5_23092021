@@ -3,10 +3,13 @@ const id = urlParams.get('id');
 // on récupére l'id présent dans l'URL de la page
 
 /*----------------------------------------------------------------------------- contenu de la page */
+
 getProduct(id)
 .then(function(nounours) {
-  console.log(nounours);
-
+  
+  let titre = document.getElementById("titre");
+  titre.innerText = "Recontrez " +  nounours.name; 
+  
   let name = document.getElementById("nom");
   name.innerText = nounours.name;
 
@@ -25,8 +28,8 @@ getProduct(id)
   couleur.innerText = nounours.colors[i];
   optionCouleur.appendChild(couleur);
   }
-  
-  });
+});
+
 
 
 /*---------------------------------------------------------------- ajout des articles dans le panier*/
@@ -51,8 +54,6 @@ button.addEventListener("click", () => {
       productPanierName : nounours.name,
       productPanierImageUrl: nounours.imageUrl,
       productPanierPrice : nounours.price };
-
-    console.log ("productPanier : " + JSON.stringify(productPanier));
     return productPanier;
   }) 
 
@@ -66,9 +67,7 @@ button.addEventListener("click", () => {
       localStorage.setItem("panier", variableStorage);
     }
 
-
     else { // le panier existe déjà
-      console.log("il y avait quelque chose dans le panier");
       let panierTempStorage = localStorage.getItem("panier");
       let panierTemp = JSON.parse(panierTempStorage); //on récupére le panier et on va le modifier
 
@@ -84,7 +83,6 @@ button.addEventListener("click", () => {
         }       
       };
 
-      console.log("doublon : " + doublon);
 
       if (doublon === true) { //si il y a un doublon
         localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
