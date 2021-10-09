@@ -14,23 +14,60 @@ else { //si le panier est plein
     creationBoutonCommande();    
 }
 
-const buttonSubmit = document.getElementById("submit");
-buttonSubmit.addEventListener("click", creationContactProducts);
 
-//.then (function (data) {console.log("tableau de produit" + data)});
+/*-------------envoie d'un objet au serveur*/
+
+
+
+function send(e) {
+    e.preventDefault();
+    let products = ["5beaa8bf1c9d440000a57d94","5be9c8541c9d440000665243"] ;
+    let contact = {
+        firstName : "Sara",
+        lastName : "meunier",
+        address : "35 rue du buisson",
+        city : "lille",
+        email : "sara.meunie@gmail.com",        
+    };
+    let envoie = { contact : contact,
+        products : products}
+    ;
+    console.log("voici l'envoie" + JSON.stringify(envoie))
+
+    fetch("http://localhost:3000/api/teddies/order", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(envoie),
+
+    })
+
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+      else { console.log ("ça ne marche pas");}
+    })
+
+    .then(function(value) {
+        document
+          alert ("ça a fait un truc")
+    });
+}
+
+/*const buttonSubmit = document.getElementById("submit");
+buttonSubmit.addEventListener("click", send);*/
+
+const buttonSubmit = document.getElementById("submit");
+buttonSubmit.addEventListener("click", creationContactProducts)
+
 
 
 
 //----------------------------- functions details
 
-/*function submit (){
-    creationContact();
-    creationProducts()
-    .then (function (data){
-        console.log(data);
-    })
-
-}*/
 
 function creationTableauPanier () {
     let tableau = document.getElementById("tablebody");
@@ -145,18 +182,18 @@ function creationContactProducts (e) {
 
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
-    let adress = document.getElementById("adress").value;
+    let address = document.getElementById("address").value;
     let city = document.getElementById("city").value;
     let email = document.getElementById("email").value;
 
-    if (!firstName || !lastName || !adress || !city || !email){ // si un des champs est nul
+    if (!firstName || !lastName || !address || !city || !email){ // si un des champs est nul
         console.log(" probleme avec le formulaire")
     }
     else {
         let contact = {
             firstName : firstName,
             lastName : lastName,
-            adress : adress,
+            address : address,
             city : city,
             email : email,        
         };
@@ -174,7 +211,10 @@ function creationContactProducts (e) {
                 products.push(panier[i].productPanierId);
             }
         };
+        let envoie = { contact : contact,
+        product : product,}
         console.log (products);
+        return envoie;
     };
 }
 
