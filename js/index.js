@@ -2,8 +2,11 @@ creerListProduit()
 .then (function (nounours) {
        for (let i in nounours){
 
+              let productContainer = document.createElement("div");
+              productContainer.classList.add("col-md-4", "col-sm-6");
+
               let productCard = document.createElement('div');
-              productCard.classList.add('card', "col-md-4", "col-sm-6", );
+              productCard.classList.add('card');
 
               let productImg = document.createElement ("img");
               productImg.classList.add("card-img-top", "cover");
@@ -25,7 +28,9 @@ creerListProduit()
               productCardButton.href='product.html?id=' + nounours[i]._id;
     
               let productDiv= document.getElementById("produits");
-              productDiv.appendChild(productCard);
+              productDiv.appendChild(productContainer);
+
+              productContainer.appendChild(productCard);
 
               productCard.appendChild(productImg);
               productCard.appendChild(productCardBody);
