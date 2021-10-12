@@ -82,7 +82,7 @@ function creationTableauPanier () {
         tableau.appendChild(ligne);
 
         let divProduct = document.createElement('th');
-        divProduct.innerText = i;
+        //divProduct.innerText = i;
         ligne.appendChild(divProduct);
 
         //on crée la div avec le nom du produit
@@ -95,18 +95,19 @@ function creationTableauPanier () {
         divProductPrice.innerText = panier[i].productPanierPrice/100;
         ligne.appendChild(divProductPrice);
 
-        // on crée le bouton +
-        let divButtonAdd = document.createElement("td");
-        ligne.appendChild(divButtonAdd);
+       
+        let divButton = document.createElement("td");
+        ligne.appendChild(divButton);
 
+        // on crée le bouton +
         let buttonAdd = document.createElement('button');
         buttonAdd.innerText = "+";
         buttonAdd.classList.add("btn","btn-primary", "col-2", "m-2", "text-center", "add" );
         buttonAdd.type = "button"; 
-        divButtonAdd.appendChild(buttonAdd);
+        divButton.appendChild(buttonAdd);
 
+        
         buttonAdd.addEventListener("click", () => {
-            alert("click-add");
             panier[i].productPanierNumber += 1;
             divNumber.innerText = panier[i].productPanierNumber;
             localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
@@ -116,18 +117,13 @@ function creationTableauPanier () {
         });
         
         //on crée le bouton -
-
-        let divButtonRemove = document.createElement("td");
-        ligne.appendChild(divButtonRemove);
-
         let buttonRemove = document.createElement('button');
         buttonRemove.innerText = "-";
         buttonRemove.classList.add("btn","btn-primary", "col-2", "m-2", "text-center","remove" );
         buttonRemove.type = "button";        
-        divButtonRemove.appendChild(buttonRemove);
+        divButton.appendChild(buttonRemove);
 
         buttonRemove.addEventListener("click", () => {
-            alert("click-add");
             panier[i].productPanierNumber -= 1;
 
             if (panier[i].productPanierNumber === 0){

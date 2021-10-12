@@ -15,6 +15,9 @@ creerListProduit()
               let productCardTitle = document.createElement("h5");
               productCardTitle.classList.add('card-title');
               productCardTitle.innerText= nounours[i].name;
+
+              let productCardPrice = document.createElement("p");
+              productCardPrice.innerText = nounours[i].price/100 + " euros";
     
               let productCardButton = document.createElement("a");
               productCardButton.classList.add("btn" , "btn-primary");
@@ -28,6 +31,7 @@ creerListProduit()
               productCard.appendChild(productCardBody);
     
               productCardBody.appendChild(productCardTitle);
+              productCardBody.appendChild(productCardPrice);
               productCardBody.appendChild(productCardButton);
        }
 });

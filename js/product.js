@@ -65,6 +65,7 @@ button.addEventListener("click", () => {
       panierTemp.push(productPanier);
       let variableStorage = JSON.stringify(panierTemp);
       localStorage.setItem("panier", variableStorage);
+      alert("Produit(s) ajouté(s) au panier");
     }
 
     else { // le panier existe déjà
@@ -88,12 +89,14 @@ button.addEventListener("click", () => {
         localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
         let variableStorage = JSON.stringify(panierTemp);
         localStorage.setItem("panier", variableStorage);
+        alert("Produit(s) ajouté(s) au panier");
       }
       else {
         localStorage.removeItem("panier"); // si pas de doublon
         panierTemp.push(productPanier);// on ajout le nouveau produit et on remplace l'ancien panier par le nouveau
         let variableStorage = JSON.stringify(panierTemp);
-        localStorage.setItem("panier", variableStorage);       
+        localStorage.setItem("panier", variableStorage);
+        alert("Produit(s) ajouté(s) au panier");       
       };
     }
   })
