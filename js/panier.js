@@ -15,11 +15,12 @@ else { //si le panier est plein
 }
 
 
+
 /*-------------envoie d'un objet au serveur*/
 
 
 const buttonSubmit = document.getElementById("submit");
-buttonSubmit.addEventListener("click", sendOrder)
+//buttonSubmit.addEventListener("click", sendOrder);
 
 
 
@@ -176,30 +177,31 @@ function sendOrder(e) {
     e.preventDefault();
     let order = creationOrder();
     if (order === null) return;
+    else {
+        fetch("http://localhost:3000/api/teddies/order", {
+         method: "POST",
+        headers: {
+            'Accept': 'application/json', 
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order),
+        })
 
-    fetch("http://localhost:3000/api/teddies/order", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(order),
-    })
+        .then(function(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        else { console.log ("ça ne marche pas");}
+        })
 
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-      else { console.log ("ça ne marche pas");}
-    })
-
-    .then(function(orderResult) {
-        console.log(orderResult);
-        location.assign("confirmation.html?orderId=" + orderResult.orderId)
-    });
+        .then(function(orderResult) {
+            console.log(orderResult);
+            location.assign("confirmation.html?orderId=" + orderResult.orderId)
+        });
+    }
 }
 
-(function() {
+/*(function() {
     'use strict';
     window.addEventListener('load', function() {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -215,4 +217,23 @@ function sendOrder(e) {
         }, false);
       });
     }, false);
-  })();
+  })();*/
+
+  /*
+  (function() {
+    'use strict';
+   document.getElementById("formulaire").addEventListener('input', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();*/
