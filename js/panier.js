@@ -18,50 +18,8 @@ else { //si le panier est plein
 /*-------------envoie d'un objet au serveur*/
 
 
-
-function send(e) {
-    e.preventDefault();
-    let products = ["5beaa8bf1c9d440000a57d94","5be9c8541c9d440000665243"] ;
-    let contact = {
-        firstName : "Sara",
-        lastName : "meunier",
-        address : "35 rue du buisson",
-        city : "lille",
-        email : "sara.meunie@gmail.com",        
-    };
-    let envoie = { contact : contact,
-        products : products}
-    ;
-    console.log("voici l'envoie" + JSON.stringify(envoie))
-
-    fetch("http://localhost:3000/api/teddies/order", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(envoie),
-
-    })
-
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-      else { console.log ("ça ne marche pas");}
-    })
-
-    .then(function(value) {
-        document
-          alert ("ça a fait un truc")
-    });
-}
-
-/*const buttonSubmit = document.getElementById("submit");
-buttonSubmit.addEventListener("click", send);*/
-
 const buttonSubmit = document.getElementById("submit");
-buttonSubmit.addEventListener("click", creationContactProducts)
+buttonSubmit.addEventListener("click", sendOrder)
 
 
 
@@ -174,7 +132,7 @@ function creationBoutonCommande () {
     });
 }
 
-function creationContactProducts (e) {
+function creationOrder () {
 
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
@@ -184,6 +142,7 @@ function creationContactProducts (e) {
 
     if (!firstName || !lastName || !address || !city || !email){ // si un des champs est nul
         console.log(" probleme avec le formulaire")
+        return null;
     }
     else {
         let contact = {
@@ -193,9 +152,7 @@ function creationContactProducts (e) {
             city : city,
             email : email,        
         };
-        e.preventDefault(); // pour empecher la page de reload en envoyant le formulaire
         console.log(contact);
-        console.log("reussi");
 
         let products = [];
         let panierStorage = localStorage.getItem("panier");
@@ -207,13 +164,40 @@ function creationContactProducts (e) {
                 products.push(panier[i].productPanierId);
             }
         };
-        let envoie = { contact : contact,
-        product : product,}
+        let order = { contact : contact,
+        products : products,
+    }
         console.log (products);
-        return envoie;
+        return order;
     };
 }
 
+function sendOrder(e) {
+    e.preventDefault();
+    let order = creationOrder();
+    if (order === null) return;
+
+    fetch("http://localhost:3000/api/teddies/order", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order),
+    })
+
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+      else { console.log ("ça ne marche pas");}
+    })
+
+    .then(function(orderResult) {
+        console.log(orderResult);
+        location.assign("confirmation.html?orderId=" + orderResult.orderId)
+    });
+}
 
 (function() {
     'use strict';

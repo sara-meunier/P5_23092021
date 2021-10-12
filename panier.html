@@ -57,7 +57,7 @@
 
             <div class="col">
               <label for="firstName" class="form-label">Prénom</label>
-              <input type="text" class="form-control" id="firstName" placeholder="Prénom" required>
+              <input type="text" class="form-control" id="firstName" placeholder="Prénom"  required pattern ="[a-z]">
               <div class="invalid-feedback">
                 information obligatoire
               </div>
@@ -65,7 +65,7 @@
 
             <div class="col">
               <label for="lastName" class="form-label">Nom</label>
-              <input type="text" class="form-control" id="lastName" placeholder="Nom de famille" required>
+              <input type="text" class="form-control" id="lastName" placeholder="Nom de famille" pattern ="[a-z]" required>
               <div class="invalid-feedback">
                 information obligatoire
               </div>
@@ -75,7 +75,7 @@
 
           <div class="form-group">
             <label for="adress" class="form-label">Adresse</label>
-            <input type="text" class="form-control" id="adress" placeholder="Adresse" required>
+            <input type="text" class="form-control" id="address" placeholder="Adresse" required>
             <div class="invalid-feedback">
               information obligatoire
             </div>
