@@ -1,5 +1,12 @@
+
+/*----------------------------- contenu de la page */
+panierActif();
 creerListProduit()
-.then (function (nounours) {
+.then (afficherListProduit);
+
+//----------------------------- functions details
+
+function afficherListProduit(nounours) {
        for (let i in nounours){
 
               let productContainer = document.createElement("div");
@@ -39,7 +46,4 @@ creerListProduit()
               productCardBody.appendChild(productCardPrice);
               productCardBody.appendChild(productCardButton);
        }
-});
-
-
-
+}

@@ -7,36 +7,38 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    
+    <!-- css perso-->
     <link rel="stylesheet" href="public/css/style.css" />
     <title>Confirmation commande oricono</title>
   </head>
 
-  <body>
-    
-      
-      <nav class="nav-bar navbar-expand-lg"> 
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Accueil </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="panier.html">Panier </a>
-            </li>
-          </ul>
-      </nav>
-      <div class ="container">
+  <body>   
+    <!-- barre de navigation -->
+    <nav class="navbar navbar-expand-sm  navbar-dark bg-primary ">
+      <div class="container">      
+        <ul class="navbar-nav mr-auto">
+          <div class="navbar-brand">Orinoco</div>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Accueil </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="panier.html">Panier </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- corps de la page-->
+    <div class ="container">
 
       <h1>Confirmation de commande</h1>
-      <!--ligne 1 de produit pour essai-->
       <div id = "confirmation">
           <p>Merci pour votre achat !</p>
           <p></p>
       </div>
-
     </div>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- scripts et Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
     <script src="./js/confirmation.js"></script>

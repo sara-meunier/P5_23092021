@@ -1,8 +1,16 @@
 const API_URL = "http://localhost:3000/api/teddies";
-//localStorage.clear();
 
+//----------------------------------- affiche un petit symbole à coté du panier s'il contient un produit
 
-//------------------------------------------------------création de la classe produit OK
+function panierActif () {
+    console.log("coucou");
+    let panierActif= document.getElementById("panierActif");
+    if (localStorage.getItem("panier") != null) {
+        panierActif.classList.remove("d-none");
+    }
+}
+
+//----------------------------------- création de la classe produit
 class Product {
     constructor (colors,_id, name, price, description, imageUrl){
         this.colors=colors;
@@ -14,26 +22,29 @@ class Product {
     }
 }
 
-//---------------------------------------------------- fonction pour récupérer toutes les infos de l'API OK
+/*//------------------------------------ fonction pour récupérer toutes les infos de l'API
 function getProducts() {
     fetch (API_URL+"/")
-.then ( function(res) {//res = reponse de la requete
+
+    .then ( function(res) {//res = reponse de la requete
     if (res.ok) {
         return res.json();}
         //si la requete s'est bien passé, on récupére les données au format json
-})
-.then (function (value) {//value = les données récupérées
-console.log(value);
-})
-.catch (function(err) {
-    console.log("ohoh... Il y a un probléme")
-});
-}
+    })
 
- //------------------------------------------------------- créer la liste de produits avec l'idée d'objet
+    .then (function (value) {//value = les données récupérées
+    console.log(value);
+    })
+    .catch (function(err) {
+        console.log("ohoh... Il y a un probléme pour répurer les informations du serveur")
+    });
+}*/
+
+ //------------------------------------ créer la liste de produits avec l'idée d'objet
 
 function creerListProduit (nounours) {
     return fetch (API_URL+"/")
+    
     .then ( function(res) {//res = reponse de la requete
         if (res.ok) {
             return res.json();
@@ -51,20 +62,17 @@ function creerListProduit (nounours) {
             let priceproduct = value[i].price;
             let descriptionproduct =value[i].description;
             let imageUrlproduct = value [i].imageUrl; 
-    
-        console.log(i + " : " + nameproduct); //pour verifier que la boucle a bien marche OK
 
-        let product = new Product (
+            let product = new Product (
             colorsproduct,
             idproduct,
             nameproduct,
             priceproduct,
             descriptionproduct,
             imageUrlproduct
-        );
+            );
      
-        nounours.push (product);
-        console.log (nounours.length);
+            nounours.push (product);
         }
         return nounours;
     })
@@ -74,8 +82,7 @@ function creerListProduit (nounours) {
     });
 }
 
-
-//----------------------------------------------------fonction pour récupérer les infos de 1 objets de l'API OK
+//------------------------------------- fonction pour récupérer les infos de 1 objets de l'API OK
 function getProduct(id) {
     return fetch (API_URL+"/"+ id)
         .then ( function(res) {
@@ -107,3 +114,4 @@ function getProduct(id) {
             console.log("ohoh... Il y a un probléme");
         })
 }
+

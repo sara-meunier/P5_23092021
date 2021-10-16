@@ -8,3 +8,25 @@
     height: 25vh;
     max-height: 350px;
     }
+
+
+
+#panierActif {
+    width:20px;
+    height: 20px;
+    border-Radius: 10px;
+    background-color: #06228e ;
+    text-align:center;
+    position : relative;
+    left: 50px;
+    bottom: 35px;
+    margin-bottom: -20px;
+}
+
+
+#panierActif p {
+    text-align: center;
+    vertical-align: middle;
+    color : white;
+    margin-bottom : 3px;
+}

@@ -1,28 +1,23 @@
 /*---------------------------------------------------- mise en page du panier*/
 
 let formulaire = document.getElementById("formulaire");
-
 const divPanier = document.getElementById("panier");
 
-if (localStorage.getItem("panier") === null) { //si le panier est vide
+if (localStorage.getItem("panier") === null) { //si le panier n'existe pas
     let panierVide = document.createElement('p');
     panierVide.innerText= " Votre panier est vide";
     divPanier.appendChild(panierVide);
 }
-else { //si le panier est plein
+else { //si le panier existe
     creationTableauPanier();
     creationBoutonCommande();    
 }
-
-
 
 /*-------------envoie d'un objet au serveur*/
 
 
 const buttonSubmit = document.getElementById("submit");
-//buttonSubmit.addEventListener("click", sendOrder);
-
-
+buttonSubmit.addEventListener("click", sendOrder);
 
 
 //----------------------------- functions details
@@ -84,15 +79,19 @@ function creationTableauPanier () {
 
         buttonRemove.addEventListener("click", () => {
             panier[i].productPanierNumber -= 1;
+            console.log("panier lenght = " + panier.lenght);
+            console.log("panier = " + JSON.stringify(panier) )
 
-            if (panier[i].productPanierNumber === 0){
+            if (panier[i].productPanierNumber === 0){ //si la quantité du produit decend à 0
                 panier.splice(i, 1);
-                ligne.remove;
+                ligne.remove; // on retire le produit de la page
+
                 localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
                 let variableStorage = JSON.stringify(panier);
                 localStorage.setItem("panier", variableStorage);
                 location.reload();
             }
+
             else {
             divNumber.innerText = panier[i].productPanierNumber;
             localStorage.removeItem("panier");// on remplace l'ancien panier par le nouveau
@@ -117,6 +116,13 @@ function creationTableauPanier () {
     divResume.innerText = "total de votre commande :    " + total/100 + " euros";
     divResume.classList.add("col", "border", "m-2",);
     divPanier.appendChild(divResume);
+
+    if (total === 0) {
+        console.log("panier supprimé");
+                    localStorage.removeItem("panier");
+                   location.reload();
+
+    }
 }
 
 function creationBoutonCommande () {
@@ -128,8 +134,9 @@ function creationBoutonCommande () {
     buttonBuy.type = "button"; 
     divButtonBuy.appendChild(buttonBuy);
 
+    // on rend le formulaire de contact accessible aprés le click sur le bouton "'commander"
     buttonBuy.addEventListener("click", () => {
-        formulaire.hidden = false;
+        formulaire.classList.remove("d-none");
     });
 }
 
@@ -153,7 +160,6 @@ function creationOrder () {
             city : city,
             email : email,        
         };
-        console.log(contact);
 
         let products = [];
         let panierStorage = localStorage.getItem("panier");
@@ -161,32 +167,39 @@ function creationOrder () {
 
         for (let i in panier) {
             for (let j = panier[i].productPanierNumber; j!=0; j--) {
-                console.log("j = " + j);
                 products.push(panier[i].productPanierId);
             }
         };
-        let order = { contact : contact,
-        products : products,
-    }
-        console.log (products);
+        let order = {
+            contact : contact,
+            products : products,
+        }
         return order;
     };
 }
 
 function sendOrder(e) {
-    e.preventDefault();
+        
     let order = creationOrder();
-    if (order === null) return;
-    else {
+    let form = document.getElementById("form");
+
+    if (order === null || !form.checkValidity()) { // si le formulaire n'est pas valide
+        console.log("form pas validé");
+     return;}
+
+    else { //si le formulaire est valide
+        e.preventDefault();
+        // on envoie la commande au serveur
         fetch("http://localhost:3000/api/teddies/order", {
-         method: "POST",
-        headers: {
-            'Accept': 'application/json', 
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(order),
+            method: "POST",
+            headers: {
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order),
         })
 
+        //on récupére la réponse du serveur
         .then(function(res) {
         if (res.ok) {
             return res.json();
@@ -194,46 +207,29 @@ function sendOrder(e) {
         else { console.log ("ça ne marche pas");}
         })
 
+        // on redirige sur la page de confirmation de commande
         .then(function(orderResult) {
-            console.log(orderResult);
-            location.assign("confirmation.html?orderId=" + orderResult.orderId)
+            location.assign("confirmation.html?orderId=" + orderResult.orderId) 
         });
     }
 }
 
-/*(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+// forms validation de Bootstrap
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
           }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();*/
-
-  /*
-  (function() {
-    'use strict';
-   document.getElementById("formulaire").addEventListener('input', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();*/
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
