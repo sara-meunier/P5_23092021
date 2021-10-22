@@ -108,13 +108,13 @@ function creationTableauPanier () {
     };
 
     //on crée la div avec le total
-    let divResume = document.createElement("div");
+    let divResume = document.createElement("p");
     let total = 0;
     for (let i in panier) {
         total += panier[i].productPanierPrice * panier[i].productPanierNumber;        
     };
     divResume.innerText = "total de votre commande :    " + total/100 + " euros";
-    divResume.classList.add("col", "border", "m-2",);
+    divResume.classList.add("col", "border", "m-2", "font-weight-bold",);
     divPanier.appendChild(divResume);
 
     if (total === 0) {

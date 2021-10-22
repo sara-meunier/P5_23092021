@@ -51,7 +51,7 @@
         </div>
 
         <!-- le bouton commander-->
-        <div id="buttonBuy" class="text-center">
+        <div id="buttonBuy" class="text-center mt-3">
         </div>
         
         <!--- le formulaire-->
@@ -65,7 +65,7 @@
                 <label for="firstName" class="form-label">Prénom</label>
                 <input type="text" class="form-control needs-validation" novalidate id="firstName" placeholder="Prénom"  required pattern="[A-Za-z]+">
                 <div class="invalid-feedback">
-                information obligatoire
+                  information obligatoire. lettres uniquement.
                 </div>
               </div>
 
@@ -74,7 +74,7 @@
                 <label for="lastName" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="lastName" placeholder="Nom de famille" pattern="[A-Za-z]+" title="nom de famille sans numéro" required>
                 <div class="invalid-feedback">
-                information obligatoire
+                information obligatoire. Lettres uniquement
                 </div>
               </div>
             </div>
@@ -100,10 +100,9 @@
               <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email" required>
               <div class="invalid-feedback"> Cette adresse mail n'est pas valide
               </div>
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <!-- boutton submit-->
-            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+              <button type="submit" class="btn btn-primary mt-3" id="submit"> envoyer </button>
           </form> 
         </div>
     </div>

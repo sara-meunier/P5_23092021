@@ -22,24 +22,6 @@ class Product {
     }
 }
 
-/*//------------------------------------ fonction pour récupérer toutes les infos de l'API
-function getProducts() {
-    fetch (API_URL+"/")
-
-    .then ( function(res) {//res = reponse de la requete
-    if (res.ok) {
-        return res.json();}
-        //si la requete s'est bien passé, on récupére les données au format json
-    })
-
-    .then (function (value) {//value = les données récupérées
-    console.log(value);
-    })
-    .catch (function(err) {
-        console.log("ohoh... Il y a un probléme pour répurer les informations du serveur")
-    });
-}*/
-
  //------------------------------------ créer la liste de produits avec l'idée d'objet
 
 function creerListProduit (nounours) {
@@ -82,7 +64,7 @@ function creerListProduit (nounours) {
     });
 }
 
-//------------------------------------- fonction pour récupérer les infos de 1 objets de l'API OK
+//------------------------------------- fonction pour récupérer les infos de 1 objets de l'API
 function getProduct(id) {
     return fetch (API_URL+"/"+ id)
         .then ( function(res) {

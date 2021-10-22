@@ -50,7 +50,6 @@ function ajoutProduitPanier () {
       productPanierId: id,
       productPanierNumber: productNumber,
       productPanierName : nounours.name,
-      productPanierImageUrl: nounours.imageUrl,
       productPanierPrice : nounours.price };
     return productPanier;
   })
